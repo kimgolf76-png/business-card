@@ -1,46 +1,43 @@
-# business-card
-## 설명
-프로젝트 목적과 주요 기능을 짧게 적어주세요.
-- 예: NFC를 사용해 명함 정보를 주고받는 모바일 앱
+# Business Card (React Native)
 
-## 빠른 시작(예시)
-1. 저장소 클론
+간단한 NFC 명함 교환 앱(React Native).
+
+## 개요
+이 프로젝트는 React Native + react-native-nfc-manager를 사용하여 iOS/Android 양쪽에서 NFC 태그를 읽고(및 쓰기) 명함 정보를 교환하는 예제 앱입니다.
+
+## 빠른 시작
+1. 프로젝트 생성 (권장)
    ```bash
-   git clone https://github.com/kimgolf76-png/business-card.git
-   cd business-card
+   npx react-native init business_card_app
+   cd business_card_app
    ```
-2. 요구사항(예: Node, Java, Android SDK 등)을 설치하세요.
-3. 빌드 및 실행
-   - Node/웹:
-     ```bash
-     npm install
-     npm start
-     ```
-   - Android 예시(Gradle):
-     ```bash
-     ./gradlew assembleDebug
-     ./gradlew installDebug
-     ```
-   - iOS 예시(CocoaPods/Xcode):
-     ```bash
-     cd ios
-     pod install
-     open BusinessCard.xcworkspace
-     ```
-4. 테스트 실행
+2. 의존성 설치
    ```bash
-   npm test
+   npm install react-native-nfc-manager
+   cd ios && pod install && cd ..
    ```
+3. iOS 설정 (Xcode)
+   - Xcode에서 ios/ 폴더의 workspace를 열기: `open ios/business_card_app.xcworkspace`
+   - Signing & Capabilities → + Near Field Communication Tag Reading 추가
+   - Info.plist에 `NFCReaderUsageDescription` (Privacy - NFC Scan Usage Description) 키를 추가하고 설명 텍스트를 입력
+4. Android 설정
+   - `android/app/src/main/AndroidManifest.xml`에 NFC 권한/feature 추가 (README 예시 참고)
+   - minSdkVersion >= 19 권장
+5. 실행 (물리 기기 필요)
+   - Android: `npx react-native run-android`
+   - iOS: `npx react-native run-ios`
 
-## 프로젝트 구조
-- README.md
-- src/            # 소스 코드
-- app/            # 모바일 앱 소스
-- web/            # 웹 클라이언트
-- docs/           # 문서
+## 기능
+- NFC 태그 스캔(읽기)
+- NDEF 텍스트/URI 읽기
+- (선택) 명함 정보(vCard 등)를 NFC에 쓰기
 
-## 기여
-풀리퀘스트 환영합니다. 큰 변경은 이슈로 먼저 상의해 주세요.
+## 파일 구조(권장)
+- App.js            # 앱 진입점 및 예제 UI
+- index.js
+- package.json
+- android/ ios/     # 플랫폼 네이티브 코드
+- .gitignore
 
 ## 라이선스
 All Rights reserved by LAB82, company, Korea
